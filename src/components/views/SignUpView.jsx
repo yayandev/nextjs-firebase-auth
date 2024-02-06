@@ -30,7 +30,7 @@ const SignUpView = () => {
     }
 
     try {
-      await signUp(values.email, values.password);
+      const request = await signUp(values.email, values.password);
       await verifyEmail(request.user);
       setValues({
         ...values,
