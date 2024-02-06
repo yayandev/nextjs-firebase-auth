@@ -2,9 +2,13 @@
 import { useAuth } from "@/context/Auth";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import Spinner from "../elements/Spinner";
-import { login, signInWithGoogle } from "@/lib/firebase.services";
+import {
+  login,
+  signInWithGithub,
+  signInWithGoogle,
+} from "@/lib/firebase.services";
 
 const LoginView = () => {
   const { currentUser } = useAuth();
@@ -23,6 +27,15 @@ const LoginView = () => {
   const handleSignInWithGoogle = async () => {
     setValues({ ...values, loading: true, error: "" });
     const request = await signInWithGoogle();
+    if (request.error) {
+      setValues({ ...values, error: request.error });
+      setValues({ ...values, loading: false });
+    }
+  };
+
+  const handleSignInWithGithub = async () => {
+    setValues({ ...values, loading: true, error: "" });
+    const request = await signInWithGithub();
     if (request.error) {
       setValues({ ...values, error: request.error });
       setValues({ ...values, loading: false });
@@ -60,6 +73,16 @@ const LoginView = () => {
           <span>Sign In with Google</span>{" "}
           <span className="text-2xl">
             <FaGoogle />
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={handleSignInWithGithub}
+          className="p-2 rounded-sm border font-semibold w-full flex items-center gap-3 justify-center"
+        >
+          <span>Sign In with Github</span>{" "}
+          <span className="text-2xl">
+            <FaGithub />
           </span>
         </button>
         <p className="text-center text-slate-500 font-semibold my-3">or</p>

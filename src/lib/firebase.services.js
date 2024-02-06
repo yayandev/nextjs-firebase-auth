@@ -47,3 +47,10 @@ export const signInWithGoogle = () => {
 export const forgotPassword = (email) => {
   return sendPasswordResetEmail(auth, email);
 };
+
+// sign with github
+
+export const signInWithGithub = () => {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
+};
