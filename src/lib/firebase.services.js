@@ -1,5 +1,6 @@
 // sign up
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -51,6 +52,6 @@ export const forgotPassword = (email) => {
 // sign with github
 
 export const signInWithGithub = () => {
-  const provider = new GoogleAuthProvider();
+  const provider = new GithubAuthProvider();
   return signInWithPopup(auth, provider);
 };
